@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+PROJECT="$HOME/projects/joyproj"
+
+echo "Jbuild: Building '$PROJECT'..."
+
+rm -rf "$PROJECT/build/joyproj/"*
+cp -rf "$PROJECT/src/"* "$PROJECT/build/joyproj/"
+cp "$PROJECT/VERSION" "$PROJECT/build/joyproj/"
+
+echo "  Done"

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+PROJECT="$HOME/projects/joyproj"
+
+~/.python/bin/python3 "$PROJECT/build/joyproj/joyproj.py" "$@"
