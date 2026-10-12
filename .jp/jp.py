@@ -1,28 +1,22 @@
-# joyproj v0.1 - jayiise@github.com
+# joyproj - jayiise@github.com
 # jp template - change as you wish!
 
 from pathlib import Path
-import subprocess, sys
+import subprocess
 
-def test(args):
-  print(f"Hello joyproj! Extra args: {" ".join(args)}")
-
-def bash_test(args):
-  subprocess.run([Path(__file__).parent / "bash-testy.sh", *args[1:]])
-
-def run(args):
-  subprocess.run([Path(__file__).parent / "run.sh", *args[1:]])
-
-def build(args):
-  subprocess.run([Path(__file__).parent / "build.sh", *args[1:]])
+JP_DIR = Path(__file__).parent
 
 def dev(args):
-  subprocess.run([Path(__file__).parent / "dev.sh", *args[1:]])
+  subprocess.run([JP_DIR / "dev.sh", *args[1:]])  
+
+def build(args):
+  subprocess.run([JP_DIR / "build.sh", *args[1:]])  
+
+def run(args):
+  subprocess.run([JP_DIR / "run.sh", *args[1:]])  
 
 commands = {
-  "testy": test,
-  "bash-testy": bash_test,
-  "run": run,
+  "dev": dev,
   "build": build,
-  "dev": dev
+  "run": run
 }
