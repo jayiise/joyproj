@@ -1,5 +1,5 @@
 # joyproj (wip)
-A joyful project task runner.
+A joyful project task runner. (BUGS WILL BE EXPECTED)
 
 Run projects user-defined tasks in the `.jp` directory in the project directory using the CLI.
 
