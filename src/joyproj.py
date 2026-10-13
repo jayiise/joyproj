@@ -1,6 +1,3 @@
-# joyproj - jayiise@github.com
-
-# Init
 from pathlib import Path
 from types import ModuleType
 import subprocess, json, sys, importlib.util, shutil
@@ -19,7 +16,9 @@ def show_help():
   show_header()
   print('''A joyful project task runner. [BUGS WILL BE EXPECTED]
 
-Run user-defined tasks for projects using the CLI.''')
+Run user-defined tasks for projects using the CLI.
+
+(psst! Read the README.md file! I can't show much okay? Ok bye!)''')
 
 def get_projects():
   with open(PROJECTS_FILE, "r") as f:
@@ -144,6 +143,13 @@ def cli(args: tuple[str, ...]):
 
     create_project(args[2], template) 
     return
+  elif args[1] in ("a", "add"):
+    if len(args) < 3:
+      print("joyproj: No name argument specified!")
+      return
+
+    append_project(args[2], str(CWD))
+    return
   elif args[1] in ("r", "remove"):
     if len(args) < 3:
       print("joyproj: No name argument specified!")
@@ -162,11 +168,19 @@ def cli(args: tuple[str, ...]):
     print(f"joyproj: '{args[1]}' is not a valid command!")
     return
 
-  JS_RESULT = load_jp_project(Path(projects[args[1]]))
+  JP_RESULT = load_jp_project(Path(projects[args[1]]))
 
-  if JP_RESULT != None:
-    JS_DIR, jpmodule = JS_RESULT
-    handle_jpmodule(JP_DIR, jpmodule, args[2:])
+  if JP_RESULT == None:
+    print("joyproj: There is no '.jp' directory in this project!")
+    return
+
+  JP_DIR, jpmodule = JP_RESULT
+
+  if len(args) < 3:
+    print(f"joyproj [{str(JP_DIR)}]: No commands in project specified!")
+    return
+
+  handle_jpmodule(JP_DIR, jpmodule, args[2:])
 
 # Main
 def main(args: tuple[str, ...]):
